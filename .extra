@@ -1,7 +1,10 @@
-alias storm='h && cd Documents/GitHub/storm'
-alias storm-vagrant='h && cd Documents/GitHub/storm-vagrant'
-alias go-workspace='h && cd Documents/GitHub/go'
-alias forecast='h && cd Documents/GitHub/forecast'
+alias github='h && cd Documents/GitHub'
+
+alias storm='github && cd storm'
+alias storm-vagrant='github && cd storm-vagrant'
+alias go-workspace='github && cd go'
+alias forecast='github && cd forecast'
+alias api='github && cd api'
 
 # STORM Docker aliases
 alias storm-docker-up='storm && ./develop up -d && docker ps'
@@ -13,14 +16,20 @@ alias storm-vagrant-up='storm-vagrant && echo "Bringing up vagrant box" && vagra
 alias storm-vagrant-down='storm-vagrant && echo "Halting vagrant box" && vagrant halt'
 alias storm-vagrant-restart='storm-vagrant-down && storm-vagrant-up'
 
-alias storm-restart='storm-docker-restart && storm-vagrant-restart'
-alias storm-up='storm-docker-up && storm-vagrant-up'
+alias storm-restart='storm-docker-restart && storm-vagrant-restart && storm'
+alias storm-up='storm-docker-up && storm-vagrant-up && storm'
 alias storm-down='storm-vagrant-down && storm-docker-down'
+
+alias storm-status='docker ps && storm-vagrant && vagrant status && storm'
 
 # FORECAST
 alias forecast-up='forecast && ./develop up -d'
 alias forecast-down='forecast && ./develop down'
 alias forecast-restart='forecast-down && forecast-up'
+
+# API
+alias api-up='api && ./develop up -d'
+alias api-down='api && ./develop down'
 
 # Docker Helpers ####
 alias dart='./develop artisan'
