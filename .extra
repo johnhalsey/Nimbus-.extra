@@ -6,6 +6,8 @@ alias go-workspace='github && cd go'
 alias forecast='github && cd forecast'
 alias api='github && cd api'
 
+export GOPATH='/Users/john/Documents/GitHub/go'
+
 # STORM Docker aliases
 alias storm-docker-up='storm && ./develop up -d && docker ps'
 alias storm-docker-down='storm && ./develop down'
@@ -35,7 +37,12 @@ alias api-down='api && ./develop down'
 alias dart='./develop artisan'
 alias dnpm='./develop npm'
 alias dtest='./develop test'
+alias dtestf='./develop test --filter'
 alias dtest-coverage='./develop test --coverage-html coverage'
+
+# NGROK
+alias share-forecast='h && ./ngrok http -region=eu 81'
+alias share-storm='h && ./ngrok http -region=eu 80'
 
 # SSH to STORM
 alias ssh-storm='ssh j.halsey@10.50.5.9'
