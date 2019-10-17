@@ -5,22 +5,28 @@ alias storm-vagrant='github && cd storm-vagrant'
 alias go-workspace='github && cd go'
 alias forecast='github && cd forecast'
 alias api='github && cd api'
+alias metrics='github && cd go-storm-metrics'
 
-export GOPATH='/Users/john/Documents/GitHub/go'
+export GOPATH='/Users/john/go'
 
 # STORM Docker aliases
-alias storm-docker-up='storm && ./develop up -d && docker ps'
-alias storm-docker-down='storm && ./develop down'
-alias storm-docker-restart='docker ps && storm-docker-down && storm-docker-up'
+alias storm-docker-up='storm && ./develop up -d && metrics-up && docker ps'
+alias storm-docker-down='storm && ./develop down && metrics-down && docker ps'
+alias storm-docker-restart='docker ps && storm-docker-down && storm-docker-up && metrics-restart'
 
 # STORM Vagrant aliases
 alias storm-vagrant-up='storm-vagrant && echo "Bringing up vagrant box" && vagrant up'
 alias storm-vagrant-down='storm-vagrant && echo "Halting vagrant box" && vagrant halt'
 alias storm-vagrant-restart='storm-vagrant-down && storm-vagrant-up'
 
-alias storm-restart='storm-docker-restart && storm-vagrant-restart && storm'
-alias storm-up='storm-docker-up && storm-vagrant-up && storm'
-alias storm-down='storm-vagrant-down && storm-docker-down'
+# METRICS
+alias metrics-up='metrics && docker-compose up -d'
+alias metrics-down='metrics && docker-compose down'
+alias metrics-restart='metrics && metrics-down && metrics-up'
+
+alias storm-restart='storm-docker-restart && storm-vagrant-restart && metrics-restart && storm'
+alias storm-up='storm-docker-up && storm-vagrant-up && metrics-up && storm'
+alias storm-down='storm-vagrant-down && storm-docker-down && metrics-down && storm'
 
 alias storm-status='docker ps && storm-vagrant && vagrant status && storm'
 
@@ -36,6 +42,8 @@ alias api-down='api && ./develop down'
 # Docker Helpers ####
 alias dart='./develop artisan'
 alias dnpm='./develop npm'
+alias ddev='./develop npm run dev'
+alias dwatch='./develop npm run watch'
 alias dtest='./develop test'
 alias dtestf='./develop test --filter'
 alias dtest-coverage='./develop test --coverage-html coverage'
@@ -43,6 +51,7 @@ alias dtest-coverage='./develop test --coverage-html coverage'
 # NGROK
 alias share-forecast='h && ./ngrok http -region=eu 81'
 alias share-storm='h && ./ngrok http -region=eu 80'
+alias share-metrics='h && ./ngrok http -region=eu 8080'
 
 # SSH to STORM
 alias ssh-storm='ssh j.halsey@10.50.5.9'
