@@ -1,21 +1,25 @@
 alias github='h && cd Documents/GitHub'
+alias mm='h && sites && cd menu-maker'
 
 alias storm='github && cd storm'
 alias storm-vagrant='github && cd storm-vagrant'
+alias sv='github && cd storm-vagrant'
 alias go-workspace='github && cd go'
 alias forecast='github && cd forecast'
 alias api='github && cd api'
 alias metrics='github && cd go-storm-metrics'
+alias proxy="github && cd dev-proxy"
+alias d?='docker ps'
 
 export GOPATH='/Users/john/go'
 
 # STORM Docker aliases
-alias storm-docker-up='storm && ./develop up -d && metrics-up && docker ps'
-alias storm-docker-down='storm && ./develop down && metrics-down && docker ps'
-alias storm-docker-restart='docker ps && storm-docker-down && storm-docker-up && metrics-restart'
+alias storm-docker-up='proxy && ./develop up -d && storm && ./develop up -d && docker ps && storm'
+alias storm-docker-down='storm && ./develop down && docker ps'
+alias storm-docker-restart='docker ps && storm-docker-down && storm-docker-up'
 
 # STORM Vagrant aliases
-alias storm-vagrant-up='storm-vagrant && echo "Bringing up vagrant box" && vagrant up'
+alias storm-vagrant-up='storm-vagrant && echo "Bringing up vagrant box" && vagrant up dev1'
 alias storm-vagrant-down='storm-vagrant && echo "Halting vagrant box" && vagrant halt'
 alias storm-vagrant-restart='storm-vagrant-down && storm-vagrant-up'
 
@@ -38,6 +42,12 @@ alias forecast-restart='forecast-down && forecast-up'
 # API
 alias api-up='api && ./develop up -d'
 alias api-down='api && ./develop down'
+alias api-restart='api && api-down && api-up'
+
+# PROXY
+alias proxy-up="proxy && ./develop up -d"
+alias proxy-down="proxy && ./develop down"
+alias proxy-restart="proxy-down && proxy-up"
 
 # Docker Helpers ####
 alias dart='./develop artisan'
@@ -47,6 +57,8 @@ alias dwatch='./develop npm run watch'
 alias dtest='./develop test'
 alias dtestf='./develop test --filter'
 alias dtest-coverage='./develop test --coverage-html coverage'
+alias dyarn='./develop yarn'
+alias dcomposer='./develop composer'
 
 # NGROK
 alias share-forecast='h && ./ngrok http -region=eu 81'
