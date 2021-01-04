@@ -17,11 +17,15 @@ export GOPATH='/Users/john/go'
 alias storm-docker-up='proxy && ./develop up -d && storm && ./develop up -d && docker ps && storm'
 alias storm-docker-down='storm && ./develop down && docker ps'
 alias storm-docker-restart='docker ps && storm-docker-down && storm-docker-up'
+alias sdu='storm-docker-up'
+alias sdd='storm-docker-down'
+alias sdr='storm-docker-restart'
 
 # STORM Vagrant aliases
 alias storm-vagrant-up='storm-vagrant && echo "Bringing up vagrant box" && vagrant up dev1'
 alias storm-vagrant-down='storm-vagrant && echo "Halting vagrant box" && vagrant halt'
 alias storm-vagrant-restart='storm-vagrant-down && storm-vagrant-up'
+alias sv?='storm-vagrant && vagrant status'
 
 # METRICS
 alias metrics-up='metrics && docker-compose up -d'
@@ -32,7 +36,7 @@ alias storm-restart='storm-docker-restart && storm-vagrant-restart && metrics-re
 alias storm-up='storm-docker-up && storm-vagrant-up && metrics-up && storm'
 alias storm-down='storm-vagrant-down && storm-docker-down && metrics-down && storm'
 
-alias storm-status='docker ps && storm-vagrant && vagrant status && storm'
+alias storm?='docker ps && storm-vagrant && vagrant status && storm'
 
 # FORECAST
 alias forecast-up='forecast && ./develop up -d'
@@ -67,3 +71,7 @@ alias share-metrics='h && ./ngrok http -region=eu 8080'
 
 # SSH to STORM
 alias ssh-storm='ssh j.halsey@10.50.5.9'
+alias vssh='sv && vagrant ssh dev1'
+
+# Valet Sites
+alias budget="sites && cd budget"
