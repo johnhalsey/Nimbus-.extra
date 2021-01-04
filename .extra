@@ -1,5 +1,4 @@
 alias github='h && cd Documents/GitHub'
-alias mm='h && sites && cd menu-maker'
 
 alias storm='github && cd storm'
 alias storm-vagrant='github && cd storm-vagrant'
@@ -75,3 +74,4 @@ alias vssh='sv && vagrant ssh dev1'
 
 # Valet Sites
 alias budget="sites && cd budget"
+alias mm='sites && cd menu-maker'
