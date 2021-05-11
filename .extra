@@ -69,7 +69,6 @@ alias share-storm='h && ./ngrok http -region=eu 80'
 alias share-metrics='h && ./ngrok http -region=eu 8080'
 
 # SSH to STORM
-alias ssh-storm='ssh j.halsey@10.50.5.9'
 alias vssh='sv && vagrant ssh dev1'
 
 # Valet Sites
