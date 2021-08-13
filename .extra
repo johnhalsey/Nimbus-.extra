@@ -1,4 +1,5 @@
 alias github='h && cd Documents/GitHub'
+alias mm='h && sites && cd menu-maker'
 
 alias storm='github && cd storm'
 alias storm-vagrant='github && cd storm-vagrant'
@@ -6,9 +7,12 @@ alias sv='github && cd storm-vagrant'
 alias go-workspace='github && cd go'
 alias forecast='github && cd forecast'
 alias api='github && cd api'
+alias sslbot='github && cd sslbot-backend'
 alias metrics='github && cd go-storm-metrics'
 alias proxy="github && cd dev-proxy"
 alias d?='docker ps'
+alias git-fix='git remote prune origin'
+alias git-clean='git gc --prune=now'
 
 export GOPATH='/Users/john/go'
 
@@ -47,6 +51,11 @@ alias api-up='api && ./develop up -d'
 alias api-down='api && ./develop down'
 alias api-restart='api && api-down && api-up'
 
+# SSLBOT
+alias sslbot-up='github && cd sslbot-backend && ./develop up -d'
+alias sslbot-down='github && cd sslbot-backend && ./develop down'
+alias sslbot-restart='sslbot-down && sslbot-up'
+
 # PROXY
 alias proxy-up="proxy && ./develop up -d"
 alias proxy-down="proxy && ./develop down"
@@ -55,12 +64,16 @@ alias proxy-restart="proxy-down && proxy-up"
 # Docker Helpers ####
 alias dart='./develop artisan'
 alias dnpm='./develop npm'
-alias ddev='./develop npm run dev'
+alias ddev='./develop npm run development'
 alias dwatch='./develop npm run watch'
 alias dtest='./develop test'
 alias dtestf='./develop test --filter'
-alias dtest-coverage='./develop test --coverage-html coverage'
+alias dtest-coverage='./develop coverage'
 alias dyarn='./develop yarn'
+alias dc='./develop composer'
+alias dc-da='./develop composer dump-autoload'
+alias ddown='docker stop $(docker ps -aq)'
+alias fix='./develop composer install && ./develop yarn install && ./develop npm run dev && ./develop artisan cache:clear && ./develop artisan view:clear'
 alias dcomposer='./develop composer'
 
 # NGROK
@@ -69,8 +82,12 @@ alias share-storm='h && ./ngrok http -region=eu 80'
 alias share-metrics='h && ./ngrok http -region=eu 8080'
 
 # SSH to STORM
+alias ssh-storm='ssh j.halsey@10.50.5.9'
 alias vssh='sv && vagrant ssh dev1'
 
 # Valet Sites
 alias budget="sites && cd budget"
 alias mm='sites && cd menu-maker'
+
+# Valet Sites
+alias budget="sites && cd budget"
