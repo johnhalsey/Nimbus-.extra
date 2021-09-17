@@ -13,6 +13,10 @@ alias proxy="github && cd dev-proxy"
 alias d?='docker ps'
 alias git-fix='git remote prune origin'
 alias git-clean='git gc --prune=now'
+alias chrome-close="pkill chrome"
+alias chrome-open="/Applications/Google\\ \\Chrome.app/Contents/MacOS/Google\\ \\Chrome"
+alias start="chrome-close && chrome-open https://nimbushosting.atlassian.net/secure/RapidBoard.jspa?rapidView=2&projectKey=STRM https://calendar.google.com/calendar/u/1/r'
+alias prs="open -a 'Google Chrome' https://github.com/nimbushosting/storm/pulls https://app.circleci.com/pipelines/github/nimbushosting/storm?branch=develop"
 
 export GOPATH='/Users/john/go'
 
