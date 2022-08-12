@@ -4,44 +4,39 @@ alias mm='h && sites && cd menu-maker'
 alias storm='github && cd storm'
 alias storm-vagrant='github && cd storm-vagrant'
 alias sv='github && cd storm-vagrant'
-alias go-workspace='github && cd go'
+#alias go-workspace='github && cd go'
 alias forecast='github && cd forecast'
-alias api='github && cd api'
-alias sslbot='github && cd sslbot-backend'
+#alias api='github && cd api'
+#alias sslbot='github && cd sslbot-backend'
 alias metrics='github && cd go-storm-metrics'
 alias proxy="github && cd dev-proxy"
 alias d?='docker ps'
 alias git-fix='git remote prune origin'
 alias git-clean='git gc --prune=now'
-alias chrome-close="pkill chrome"
-alias chrome-open="/Applications/Google\\ \\Chrome.app/Contents/MacOS/Google\\ \\Chrome"
-alias start="chrome-close && chrome-open https://nimbushosting.atlassian.net/secure/RapidBoard.jspa?rapidView=2&projectKey=STRM https://calendar.google.com/calendar/u/1/r'
 alias prs="open -a 'Google Chrome' https://github.com/nimbushosting/storm/pulls https://app.circleci.com/pipelines/github/nimbushosting/storm?branch=develop"
 
 export GOPATH='/Users/john/go'
 
 # STORM Docker aliases
-alias storm-docker-up='proxy && ./develop up -d && storm && ./develop up -d && docker ps && storm'
-alias storm-docker-down='storm && ./develop down && docker ps'
-alias storm-docker-restart='docker ps && storm-docker-down && storm-docker-up'
-alias sdu='storm-docker-up'
-alias sdd='storm-docker-down'
-alias sdr='storm-docker-restart'
+alias sdu='proxy && ./develop up -d && storm && ./develop up -d && metrics-up && docker ps && storm'
+alias sdd='metrics-down && buffer-down && storm && ./develop down && docker ps'
+alias sdr='docker ps && sdd && sdu'
 
 # STORM Vagrant aliases
-alias storm-vagrant-up='storm-vagrant && echo "Bringing up vagrant box" && vagrant up dev1'
+alias storm-vagrant-up='storm-vagrant && echo "Bringing up vagrant box" && vagrant up dev1 --provider=parallels'
 alias storm-vagrant-down='storm-vagrant && echo "Halting vagrant box" && vagrant halt'
 alias storm-vagrant-restart='storm-vagrant-down && storm-vagrant-up'
 alias sv?='storm-vagrant && vagrant status'
 
 # METRICS
-alias metrics-up='metrics && docker-compose up -d'
+alias metrics-up='metrics && docker-compose up -d && make test'
 alias metrics-down='metrics && docker-compose down'
 alias metrics-restart='metrics && metrics-down && metrics-up'
 
-alias storm-restart='storm-docker-restart && storm-vagrant-restart && metrics-restart && storm'
-alias storm-up='storm-docker-up && storm-vagrant-up && metrics-up && storm'
-alias storm-down='storm-vagrant-down && storm-docker-down && metrics-down && storm'
+alias build-storm='proxy-up && storm && make build && metrics-up'
+alias storm-restart='sdr && storm-vagrant-restart && metrics-restart && storm'
+alias storm-up='sdu && storm-vagrant-up && metrics-up && storm'
+alias storm-down='storm-vagrant-down && sdd && metrics-down && buffer-down storm'
 
 alias storm?='docker ps && storm-vagrant && vagrant status && storm'
 
@@ -54,6 +49,12 @@ alias forecast-restart='forecast-down && forecast-up'
 alias api-up='api && ./develop up -d'
 alias api-down='api && ./develop down'
 alias api-restart='api && api-down && api-up'
+
+# Buffer
+alias buffer='github && cd rest-buffer'
+alias buffer-up='buffer && make up'
+alias buffer-down='buffer && ./develop down'
+alias buffer-restart='buffer-down && buffer-up'
 
 # SSLBOT
 alias sslbot-up='github && cd sslbot-backend && ./develop up -d'
@@ -68,30 +69,36 @@ alias proxy-restart="proxy-down && proxy-up"
 # Docker Helpers ####
 alias dart='./develop artisan'
 alias dnpm='./develop npm'
-alias ddev='./develop npm run development'
-alias dwatch='./develop npm run watch'
+alias ddev='./develop npm run development && dart cache:clear && dart route:clear && dart view:clear'
+alias dwatch='./develop npm run watch-poll'
 alias dtest='./develop test'
 alias dtestf='./develop test --filter'
 alias dtest-coverage='./develop coverage'
+alias djest='./develop npm run test'
+alias djestf='./develop npm run test -t'
+alias djest-coverage='./develop npm run test-coverage'
 alias dyarn='./develop yarn'
 alias dc='./develop composer'
 alias dc-da='./develop composer dump-autoload'
 alias ddown='docker stop $(docker ps -aq)'
 alias fix='./develop composer install && ./develop yarn install && ./develop npm run dev && ./develop artisan cache:clear && ./develop artisan view:clear'
 alias dcomposer='./develop composer'
+alias clear-all='dart cache:clear && dart config:clear && dart view:clear && dart route:clear'
 
 # NGROK
 alias share-forecast='h && ./ngrok http -region=eu 81'
-alias share-storm='h && ./ngrok http -region=eu 80'
+alias share-storm='h && ./ngrok http -region=eu 83'
 alias share-metrics='h && ./ngrok http -region=eu 8080'
 
 # SSH to STORM
 alias ssh-storm='ssh j.halsey@10.50.5.9'
+alias ssh-restore-staging='ssh j.halsey@restore-server-staging.nh-backup.co.uk'
+alias ssh-restore='ssh j.halsey@restore-server.nh-backup.co.uk'
 alias vssh='sv && vagrant ssh dev1'
 
 # Valet Sites
-alias budget="sites && cd budget"
-alias mm='sites && cd menu-maker'
+#alias budget="sites && cd budget"
+#alias mm='sites && cd menu-maker'
 
-# Valet Sites
-alias budget="sites && cd budget"
+# ARM
+alias arm='arch -x86_64'
